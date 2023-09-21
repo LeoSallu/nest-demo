@@ -1,4 +1,11 @@
-import { BaseEntity, Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import {
+  BaseEntity,
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  ManyToOne,
+} from 'typeorm';
+import { User } from '../users/user.entity';
 
 @Entity('posts')
 export class Post extends BaseEntity {
@@ -14,4 +21,6 @@ export class Post extends BaseEntity {
     type: Date,
   })
   date: Date;
+  @ManyToOne(() => User, (user) => user.post)
+  user: User;
 }
