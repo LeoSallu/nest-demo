@@ -4,8 +4,11 @@ import {
   PrimaryGeneratedColumn,
   Column,
   ManyToOne,
+  ManyToMany,
+  JoinTable,
 } from 'typeorm';
 import { User } from '../users/user.entity';
+import { Category } from '../categories/category.entity';
 
 @Entity('posts')
 export class Post extends BaseEntity {
@@ -23,4 +26,7 @@ export class Post extends BaseEntity {
   date: Date;
   @ManyToOne(() => User, (user) => user.post)
   user: User;
+  @ManyToMany(() => Category, (category) => category.post)
+  @JoinTable()
+  category: Category[];
 }
